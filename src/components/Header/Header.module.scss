@@ -1,0 +1,14 @@
+.header {
+  position: sticky;
+  display: flex;
+  padding: 15px;
+  top: 0rem;
+  height: auto;
+  width: 100%;
+  background-color: rgb(16, 39, 71);
+  .logoWrapper {
+    .stackLineLogo {
+      fill: white;
+    }
+  }
+}
