@@ -8,6 +8,9 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
+  basePath: '/stackline',
+  output: 'export',
+  reactStrictMode: true,
 };
 
 module.exports = nextConfig;
