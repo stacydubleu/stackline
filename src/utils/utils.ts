@@ -1,12 +1,10 @@
 // utils.ts
 interface Sales {
-  sales: {
-    weekEnding: string;
-    retailSales: number;
-    wholesaleSales: number;
-    unitsSold: number;
-    retailerMargin: number;
-  };
+  weekEnding: string;
+  retailSales: number;
+  wholesaleSales: number;
+  unitsSold: number;
+  retailerMargin: number;
 }
 
 export const getSalesByMonth = (
@@ -14,11 +12,11 @@ export const getSalesByMonth = (
   type: 'retailSales' | 'wholesaleSales'
 ) => {
   const salesByMonth = Array.from({ length: 12 }).fill(0);
-
+  console.log(salesData);
   salesData.forEach(sale => {
     const monthIndex = parseInt(sale.weekEnding.split('-')[1]) - 1;
     const salesAmount = sale[type];
-
+    //@ts-ignore
     salesByMonth[monthIndex] += salesAmount;
   });
 

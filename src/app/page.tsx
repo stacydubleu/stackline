@@ -7,9 +7,27 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/lib/store';
 import { fetchItemData } from '@/lib/itemSlice';
 
+interface ItemData {
+  tags: string[];
+  image: string;
+  title: string;
+  subtitle: string;
+  brand: string;
+  id: string;
+  sales: {
+    weekEnding: string;
+    retailSales: number;
+    wholesaleSales: number;
+    unitsSold: number;
+    retailerMargin: number;
+    length: number;
+  };
+}
+
 export default function Home() {
   const dispatch = useAppDispatch();
-  const { itemData, isLoading, isError } = useAppSelector(state => state.item);
+  const { isLoading, isError } = useAppSelector(state => state.item);
+  const data = useAppSelector(state => state.item.itemData);
 
   useEffect(() => {
     dispatch(fetchItemData());
@@ -23,24 +41,24 @@ export default function Home() {
     return <div>Error fetching data.</div>;
   }
 
-  const item =
-    itemData[0] && typeof itemData[0] === 'object' ? itemData[0] : null;
+  const item = data[0] as ItemData;
 
   return (
     <main className={styles.main}>
       <div className={styles.itemContainer}>
         <Item
           data={{
-            tags: itemData[0]?.tags,
-            image: itemData[0]?.image,
-            title: itemData[0]?.title,
-            subtitle: itemData[0]?.subtitle,
-            brand: itemData[0]?.brand,
-            id: itemData[0]?.id,
+            tags: item?.tags,
+            image: item?.image,
+            title: item?.title,
+            subtitle: item?.subtitle,
+            brand: item?.brand,
+            id: item?.id,
           }}
         />
       </div>
       <div className={styles.graphContainer}>
+        {/* @ts-ignore */}
         <Graph sales={item?.sales} />
       </div>
       <div className={styles.tableContainer}></div>

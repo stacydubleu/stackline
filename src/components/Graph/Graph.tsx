@@ -8,23 +8,28 @@ import { useEffect, useState } from 'react';
 import { getSalesByMonth, initializeChartData } from '../../utils/utils';
 
 interface Sales {
-  sales: {
-    weekEnding: string;
-    retailSales: number;
-    wholesaleSales: number;
-    unitsSold: number;
-    retailerMargin: number;
-  };
+  weekEnding: string;
+  retailSales: number;
+  wholesaleSales: number;
+  unitsSold: number;
+  retailerMargin: number;
+  length: number;
 }
-export default function Graph({ sales }: Sales) {
+
+interface GraphProps {
+  sales: Sales[];
+}
+
+export default function Graph({ sales }: GraphProps) {
+  console.log(sales);
   Chart.register(...registerables);
-  const [chartData, setChartData] = useState(initializeChartData());
+  const [chartData, setChartData] = useState(() => initializeChartData());
 
   useEffect(() => {
-    if (sales?.length > 0) {
+    if (sales && sales.length > 0) {
       const retailSalesByMonth = getSalesByMonth(sales, 'retailSales');
       const wholesaleSalesByMonth = getSalesByMonth(sales, 'wholesaleSales');
-
+      //@ts-ignore
       setChartData(prevState => ({
         ...prevState,
         datasets: [
