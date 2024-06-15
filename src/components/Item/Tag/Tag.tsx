@@ -1,4 +1,4 @@
-import styles from './tag.module.scss';
+import styles from './Tag.module.scss';
 import Image from 'next/image';
 
 export default function Tag({ text }: { text: string }) {
