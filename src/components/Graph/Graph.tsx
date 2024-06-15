@@ -21,7 +21,6 @@ interface GraphProps {
 }
 
 export default function Graph({ sales }: GraphProps) {
-  console.log(sales);
   Chart.register(...registerables);
   const [chartData, setChartData] = useState(() => initializeChartData());
 
